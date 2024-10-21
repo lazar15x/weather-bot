@@ -1,10 +1,12 @@
 const TelegramBot = require('node-telegram-bot-api');
-require('dotenv').config();
 
-const baseURL = 'http://api.weatherapi.com/v1';
-const weatherFormat = 'current.json';
+const BASE_URL = 'http://api.weatherapi.com/v1';
+const WEATHER_API_KEY = 'b56c589477474d5988b142339242110';
+//здесь добавить токен вашего бота
+const TOKEN_BOT = '';
+const WEATHER_FORMAT = 'current.json';
 
-const bot = new TelegramBot(process.env.TOKEN_BOT, { polling: true });
+const bot = new TelegramBot(TOKEN_BOT, { polling: true });
 
 bot.onText(/\/start/, msg => {
   bot.sendMessage(
@@ -42,7 +44,7 @@ bot.on('text', async msg => {
 async function getWeatherInfo(city) {
   try {
     const response = await fetch(
-      `${baseURL}/${weatherFormat}?key=${process.env.WEATHER_API_KEY}&q=${city}`,
+      `${BASE_URL}/${WEATHER_FORMAT}?key=${WEATHER_API_KEY}&q=${city}`,
     );
     console.log('res', response);
 
